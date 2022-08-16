@@ -264,7 +264,7 @@ class LayerNorm(nn.Module):
 @register_model
 def SLaK_tiny(pretrained=False, **kwargs):
     model = SLaK(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], in_chans=3, num_classes=1000, drop_path_rate=0.1,
-                 layer_scale_init_value=1e-6, head_init_scale=1., kernel_size=[51, 49, 47, 13, 5], width_factor=1.0, Decom=None, bn=True, **kwargs)
+                 layer_scale_init_value=1e-6, head_init_scale=1., kernel_size=[51, 49, 47, 13, 5], width_factor=1.3, Decom=True, bn=True, **kwargs)
     if pretrained:
         url = 'https://surfdrive.surf.nl/files/index.php/s/WiQYWNclJ9bW5XV/download'
         checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu")
