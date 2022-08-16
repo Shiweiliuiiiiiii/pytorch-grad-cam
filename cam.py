@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import torch
 from torchvision import models
+from Models.SLaK import SLaK_tiny
 from pytorch_grad_cam import GradCAM, \
     HiResCAM, \
     ScoreCAM, \
@@ -25,6 +26,8 @@ from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 
 def get_args():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--model', default='SLaK_tiny', type=str, metavar='MODEL',
+                        help='Name of model to train')
     parser.add_argument('--use-cuda', action='store_true', default=False,
                         help='Use NVIDIA GPU acceleration')
     parser.add_argument(
@@ -79,7 +82,10 @@ if __name__ == '__main__':
          "fullgrad": FullGrad,
          "gradcamelementwise": GradCAMElementWise}
 
-    model = models.resnet50(pretrained=True)
+    if args.model == 'SLaK_tiny':
+        model = SLaK_tiny(pretrained=True)
+    else:
+        model = models.resnet50(pretrained=True)
 
     # Choose the target layer you want to compute the visualization for.
     # Usually this will be the last convolutional layer in the model.
@@ -93,7 +99,8 @@ if __name__ == '__main__':
     # You can also try selecting all layers of a certain type, with e.g:
     # from pytorch_grad_cam.utils.find_layers import find_layer_types_recursive
     # find_layer_types_recursive(model, [torch.nn.ReLU])
-    target_layers = [model.layer4]
+    # target_layers = [model.layer4]
+    target_layers = [model.stages[-1]]
 
     rgb_img = cv2.imread(args.image_path, 1)[:, :, ::-1]
     rgb_img = np.float32(rgb_img) / 255
