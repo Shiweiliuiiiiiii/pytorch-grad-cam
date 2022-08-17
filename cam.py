@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import torch
 from torchvision import models
-from Models.SLaK import SLaK_tiny
+from Models.SLaK import SLaK_tiny, ConvNeXt_tiny, Rep_tiny
 from pytorch_grad_cam import GradCAM, \
     HiResCAM, \
     ScoreCAM, \
@@ -84,6 +84,10 @@ if __name__ == '__main__':
 
     if args.model == 'SLaK_tiny':
         model = SLaK_tiny(pretrained=True)
+    elif args.model == 'ConvNeXt_tiny':
+        model = ConvNeXt_tiny(pretrained=True)
+    elif args.model == 'Rep_tiny':
+        model = Rep_tiny(pretrained=True)
     else:
         model = models.resnet50(pretrained=True)
 
