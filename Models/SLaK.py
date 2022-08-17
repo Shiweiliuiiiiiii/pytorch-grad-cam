@@ -272,6 +272,26 @@ def SLaK_tiny(pretrained=False, **kwargs):
     return model
 
 @register_model
+def ConvNeXt_tiny(pretrained=False, **kwargs):
+    model = SLaK(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], in_chans=3, num_classes=1000, drop_path_rate=0.1,
+                 layer_scale_init_value=1e-6, head_init_scale=1., kernel_size=[7, 7, 7, 7, 100], width_factor=1.0, Decom=False, bn=True, **kwargs)
+    if pretrained:
+        url = 'https://surfdrive.surf.nl/files/index.php/s/nqXpTgUniGN4N8A/download'
+        checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu")
+        model.load_state_dict(checkpoint["model"])
+    return model
+
+@register_model
+def Rep_tiny(pretrained=False, **kwargs):
+    model = SLaK(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], in_chans=3, num_classes=1000, drop_path_rate=0.1,
+                 layer_scale_init_value=1e-6, head_init_scale=1., kernel_size=[31, 29, 27, 13, 5], width_factor=1.0, Decom=False, bn=True, **kwargs)
+    if pretrained:
+        url = 'https://surfdrive.surf.nl/files/index.php/s/q3HIXNepaBVZBzB/download'
+        checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu")
+        model.load_state_dict(checkpoint["model"])
+    return model
+
+@register_model
 def SLaK_small(pretrained=False, **kwargs):
     model = SLaK(depths=[3, 3, 27, 3], dims=[96, 192, 384, 768], **kwargs)
 
