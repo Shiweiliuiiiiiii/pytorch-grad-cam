@@ -83,11 +83,11 @@ if __name__ == '__main__':
          "gradcamelementwise": GradCAMElementWise}
 
     if args.model == 'SLaK_tiny':
-        model = SLaK_tiny(pretrained=True)
+        model = SLaK_tiny(pretrained='/projects/0/prjste21060/projects/LoRA_LK/checkpoint/github_upload/checkpoint-best.pth')
     elif args.model == 'ConvNeXt_tiny':
-        model = ConvNeXt_tiny(pretrained=True)
+        model = ConvNeXt_tiny(pretrained='/home/luyin/Project/SLaK/LoRA_LK/Checkpoints/submit/ConvNeXt/120epochs/checkpoint-best.pth')
     elif args.model == 'Rep_tiny':
-        model = Rep_tiny(pretrained=True)
+        model = Rep_tiny(pretrained='~/project_space/LoRA_LK/transfer/Kernel_size/31292713/5/Rep/120epochs/checkpoint-best.pth')
     else:
         model = models.resnet50(pretrained=True)
 

@@ -262,32 +262,41 @@ class LayerNorm(nn.Module):
 
 
 @register_model
-def SLaK_tiny(pretrained=False, **kwargs):
+def SLaK_tiny(pretrained=None,  **kwargs):
     model = SLaK(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], in_chans=3, num_classes=1000, drop_path_rate=0.1,
                  layer_scale_init_value=1e-6, head_init_scale=1., kernel_size=[51, 49, 47, 13, 5], width_factor=1.3, Decom=True, bn=True, **kwargs)
     if pretrained:
-        url = 'https://surfdrive.surf.nl/files/index.php/s/WiQYWNclJ9bW5XV/download'
-        checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu")
+        if pretrained.startswith('https'):
+            checkpoint = torch.hub.load_state_dict_from_url(
+                pretrained, map_location='cpu', check_hash=True)
+        else:
+            checkpoint = torch.load(pretrained, map_location='cpu')
         model.load_state_dict(checkpoint["model"])
     return model
 
 @register_model
-def ConvNeXt_tiny(pretrained=False, **kwargs):
+def ConvNeXt_tiny(pretrained=None, **kwargs):
     model = SLaK(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], in_chans=3, num_classes=1000, drop_path_rate=0.1,
                  layer_scale_init_value=1e-6, head_init_scale=1., kernel_size=[7, 7, 7, 7, 100], width_factor=1.0, Decom=False, bn=True, **kwargs)
     if pretrained:
-        url = 'https://surfdrive.surf.nl/files/index.php/s/nqXpTgUniGN4N8A/download'
-        checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu")
+        if pretrained.startswith('https'):
+            checkpoint = torch.hub.load_state_dict_from_url(
+                pretrained, map_location='cpu', check_hash=True)
+        else:
+            checkpoint = torch.load(pretrained, map_location='cpu')
         model.load_state_dict(checkpoint["model"])
     return model
 
 @register_model
-def Rep_tiny(pretrained=False, **kwargs):
+def Rep_tiny(pretrained=None, **kwargs):
     model = SLaK(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], in_chans=3, num_classes=1000, drop_path_rate=0.1,
                  layer_scale_init_value=1e-6, head_init_scale=1., kernel_size=[31, 29, 27, 13, 5], width_factor=1.0, Decom=False, bn=True, **kwargs)
     if pretrained:
-        url = 'https://surfdrive.surf.nl/files/index.php/s/q3HIXNepaBVZBzB/download'
-        checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu")
+        if pretrained.startswith('https'):
+            checkpoint = torch.hub.load_state_dict_from_url(
+                pretrained, map_location='cpu', check_hash=True)
+        else:
+            checkpoint = torch.load(pretrained, map_location='cpu')
         model.load_state_dict(checkpoint["model"])
     return model
 
