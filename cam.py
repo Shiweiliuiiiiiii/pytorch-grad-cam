@@ -150,6 +150,6 @@ if __name__ == '__main__':
     cam_gb = deprocess_image(cam_mask * gb)
     gb = deprocess_image(gb)
 
-    cv2.imwrite(f'{args.method}_cam_{args.model}.jpg', cam_image)
-    cv2.imwrite(f'{args.method}_gb_{args.model}.jpg', gb)
-    cv2.imwrite(f'{args.method}_cam_gb_{args.model}.jpg', cam_gb)
+    cv2.imwrite(f'{args.method}/cam_{args.model}.jpg', cam_image)
+    cv2.imwrite(f'{args.method}/gb_{args.model}.jpg', gb)
+    cv2.imwrite(f'{args.method}/cam_gb_{args.model}.jpg', cam_gb)
