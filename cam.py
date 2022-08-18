@@ -104,7 +104,7 @@ if __name__ == '__main__':
     # from pytorch_grad_cam.utils.find_layers import find_layer_types_recursive
     # find_layer_types_recursive(model, [torch.nn.ReLU])
     # target_layers = [model.layer4]
-    target_layers = [model.stages[-1]]
+    target_layers = [model.stages[-2]]
 
     rgb_img = cv2.imread(args.image_path, 1)[:, :, ::-1]
     rgb_img = np.float32(rgb_img) / 255
